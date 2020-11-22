@@ -34,9 +34,8 @@ module.exports = function(environment) {
     },
 
     moment: {
-      includeTimezone: 'subset'
-      /* ,
-           localeOutputPath : 'assets/moment-locales'*/
+      includeTimezone  : 'subset',
+      localeOutputPath : 'assets/moment-locales'
     },
 
     pace: {
@@ -65,7 +64,9 @@ module.exports = function(environment) {
       hostWhitelist: [/.+/]
     },
 
-    torii: {}
+    torii: {},
+
+    webAppGenerator: process.env.WEB_APP_GENERATOR_HOST || (environment === 'production' ? 'https://open-event-wsgen.herokuapp.com' : 'https://open-event-wsgen-dev.herokuapp.com')
   };
 
   if (environment === 'production') {

@@ -26,7 +26,7 @@ export default class LoginForm extends Component.extend(FormMixin) {
             },
             {
               type   : 'email',
-              prompt : this.l10n.t('Please enter a valid email ID')
+              prompt : this.l10n.t('Please enter a valid email address')
             }
           ]
         },
@@ -44,7 +44,8 @@ export default class LoginForm extends Component.extend(FormMixin) {
   }
 
   @action
-  async submit() {
+  async submit(e) {
+    e.preventDefault();
     this.onValid(async() => {
       const credentials = { username: this.identification, password: this.password };
       const authenticator = 'authenticator:jwt';
@@ -67,7 +68,7 @@ export default class LoginForm extends Component.extend(FormMixin) {
           this.set('errorMessage', this.l10n.tVar(e.json.error));
         } else {
           console.error('Error while authentication', e);
-          this.set('errorMessage', this.l10n.t('An unexpected error occurred.'));
+          this.set('errorMessage', this.l10n.t('An unexpected error has occurred.'));
         }
       }
 
@@ -94,7 +95,7 @@ export default class LoginForm extends Component.extend(FormMixin) {
           });
         } else {
           console.error('Error while facebook authentication', e);
-          this.notify.error(this.l10n.t('An unexpected error has occurred'), {
+          this.notify.error(this.l10n.t('An unexpected error has occurred.'), {
             id: 'unexpect_error'
           });
         }
